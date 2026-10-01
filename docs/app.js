@@ -23,6 +23,7 @@ const LEARN_REPEAT = 4;
 const ANCHOR_BATCH = 16;
 const REPLAY_BATCH = 8;
 const STORE_KEY = "guess-the-number-brain";
+const BEST_KEY = "guess-the-number-best";
 
 const PAPER = [244, 239, 228];
 const PAPER_CSS = "#f4efe4";
@@ -663,9 +664,20 @@ function guess() {
   showChrome();
 }
 
+function rememberBest() {
+  try {
+    const saved = Number(localStorage.getItem(BEST_KEY));
+    const best = Number.isFinite(saved) ? Math.max(0, Math.floor(saved)) : 0;
+    if (rightCount > best) localStorage.setItem(BEST_KEY, String(rightCount));
+  } catch (err) {
+    /* The tally on the sheet still moves. */
+  }
+}
+
 function markRight() {
   if (mode !== "answer") return;
   rightCount += 1;
+  rememberBest();
   finishRound();
 }
 

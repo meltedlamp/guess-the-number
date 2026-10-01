@@ -1,0 +1,188 @@
+:root {
+  --bg: #080e12;
+  --paper: #f4efe4;
+  --text: #ecf0f2;
+  --muted: #9aa6a4;
+  --gold: #ffd678;
+  --ooc: #e8c4a0;
+  --frame: #3a2e24;
+  --frame-edge: #d6c6aa;
+  --button: #0e1a20;
+  --edge: #2e444a;
+  --yes: #162a24;
+  --yes-edge: #78be96;
+  --no: #2e201e;
+  --no-edge: #c48c78;
+  --primary: #30281c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", sans-serif;
+  user-select: none;
+}
+
+main {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: 22px 36px 40px;
+}
+
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+#tally {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.line {
+  margin: 6px 0 16px;
+  min-height: 58px;
+  line-height: 1.15;
+}
+
+.line.digit {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.line.ooc {
+  font-size: 32px;
+  color: var(--ooc);
+}
+
+.line.prompt {
+  font-size: 32px;
+  color: var(--muted);
+}
+
+.frame {
+  background: var(--frame);
+  border: 2px solid var(--frame-edge);
+  border-radius: 8px;
+  padding: 5px;
+}
+
+#sheet {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper);
+  border-radius: 4px;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+#hint {
+  margin: 16px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.spacer { flex: 1; }
+
+button {
+  min-height: 46px;
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 2px solid var(--edge);
+  background: var(--button);
+  color: var(--text);
+  font: 700 22px/1 "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(1.25); }
+
+button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  filter: none;
+}
+
+button.primary {
+  background: var(--primary);
+  border-color: var(--gold);
+  min-width: 130px;
+}
+
+button.yes {
+  background: var(--yes);
+  border-color: var(--yes-edge);
+  min-width: 110px;
+}
+
+button.no {
+  background: var(--no);
+  border-color: var(--no-edge);
+  min-width: 110px;
+}
+
+#labels {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#labels[hidden] { display: none; }
+
+.digits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.digits button {
+  width: 58px;
+  min-height: 40px;
+  padding: 0;
+  font-size: 18px;
+}
+
+#ooc {
+  min-width: 240px;
+  min-height: 40px;
+  font-size: 18px;
+}
+
+@media (max-width: 720px) {
+  main { padding: 16px 16px 28px; }
+  .line.digit { font-size: 40px; }
+  .line.ooc, .line.prompt { font-size: 26px; }
+  button { font-size: 18px; }
+  .spacer { display: none; }
+}

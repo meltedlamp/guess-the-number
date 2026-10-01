@@ -6,6 +6,8 @@ You draw a number on a sheet. An agent named Reed reads it with a neural network
 The number is from 0 to 12. 10, 11, and 12 are both digits in that one drawing.
 A scribble, a letter, a stray tap, or a number past 12 comes back as **out of context**.
 
+Play it in the browser: [https://meltedlamp.github.io/guess-the-number/](https://meltedlamp.github.io/guess-the-number/)
+
 ## Features
 
 - **You draw, Reed reads.** The line under Reed's name is the guess: a number, or the words out of context.
@@ -26,11 +28,16 @@ pip install -r requirements.txt
 python game.py
 ```
 
-To train the factory brain again:
+To train the factory brain again, then refresh the browser copy:
 
 ```bash
 python -m guess.train
+python -m guess.export_web
 ```
+
+## In the browser
+
+Open [https://meltedlamp.github.io/guess-the-number/](https://meltedlamp.github.io/guess-the-number/). Drawing, guessing, and teaching Reed work the same way. Corrections stay in this browser. The factory brain in the repo is left alone.
 
 ## Controls
 
@@ -61,8 +68,15 @@ guess-the-number/
 │   ├── ink.py           # strokes and the 28×28 sheet the network sees
 │   ├── brain.py         # the network, a learning step, load and save
 │   ├── train.py         # draw practice sheets and write the factory brain
+│   ├── export_web.py    # pack the factory brain into docs/brain.bin
 │   ├── settings.py      # window size, colours, and the confidence cutoff
 │   └── weights.npz      # the factory brain, so the first drawing can be guessed
+├── .github/workflows/pages.yml  # publishes docs/ to GitHub Pages
+├── docs/                # the browser page (GitHub Pages)
+│   ├── index.html
+│   ├── style.css
+│   ├── app.js
+│   └── brain.bin        # factory weights and the examples Reed studies
 ├── requirements.txt     # pygame and numpy
 └── README.md
 ```

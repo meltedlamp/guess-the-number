@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guess the Number</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Reed</h1>
+      <p id="tally">0 right</p>
+    </header>
+    <p id="line" class="line prompt">Reed is waking up.</p>
+    <div class="frame">
+      <canvas id="sheet" width="680" height="390" aria-label="Drawing sheet"></canvas>
+    </div>
+    <p id="hint">Draw on the sheet. Enter guesses.</p>
+    <div class="actions">
+      <button type="button" id="undo">Undo</button>
+      <button type="button" id="clear">Clear</button>
+      <button type="button" id="guess" class="primary">Guess</button>
+      <span class="spacer"></span>
+      <button type="button" id="right" class="yes" hidden>Right</button>
+      <button type="button" id="wrong" class="no" hidden>Wrong</button>
+    </div>
+    <div id="labels" hidden>
+      <div class="digits" id="digits"></div>
+      <button type="button" id="ooc">out of context</button>
+    </div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

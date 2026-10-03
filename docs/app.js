@@ -664,6 +664,25 @@ function guess() {
   showChrome();
 }
 
+const arcadeVisit = String(Date.now());
+
+function noteArcade(score) {
+  try {
+    const player = (localStorage.getItem("melted-arcade-player") || "").trim();
+    if (!player || score <= 0) return;
+    const raw = localStorage.getItem("melted-arcade-slips") || "[]";
+    const slips = JSON.parse(raw);
+    const list = Array.isArray(slips) ? slips : [];
+    const row = { game: "guess", score, player, note: "", at: Date.now(), visit: arcadeVisit };
+    const prev = list.findIndex((item) => item && item.visit === arcadeVisit);
+    if (prev >= 0) list[prev] = row;
+    else list.push(row);
+    localStorage.setItem("melted-arcade-slips", JSON.stringify(list.slice(-40)));
+  } catch (err) {
+    /* The sheet still counts. The arcade will miss this sitting. */
+  }
+}
+
 function rememberBest() {
   try {
     const saved = Number(localStorage.getItem(BEST_KEY));
@@ -678,6 +697,7 @@ function markRight() {
   if (mode !== "answer") return;
   rightCount += 1;
   rememberBest();
+  noteArcade(rightCount);
   finishRound();
 }
 
@@ -730,6 +750,7 @@ function wire() {
   rightBtn.addEventListener("click", markRight);
   wrongBtn.addEventListener("click", markWrong);
   window.addEventListener("keydown", onKey);
+  window.addEventListener("pagehide", () => noteArcade(rightCount));
 
   canvas.addEventListener("pointerdown", (event) => {
     if (mode !== "draw" || event.button !== 0) return;
